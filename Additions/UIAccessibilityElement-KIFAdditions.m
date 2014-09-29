@@ -126,19 +126,19 @@ MAKE_CATEGORIES_LOADABLE(UIAccessibilityElement_KIFAdditions)
             break;
         }
         
-        if ([superview isKindOfClass:[UIScrollView class]]) {
-            UIScrollView *scrollView = (UIScrollView *)superview;
+        // if ([superview isKindOfClass:[UIScrollView class]]) {
+        //     UIScrollView *scrollView = (UIScrollView *)superview;
             
-            if ((UIAccessibilityElement *)view == element) {
-                [scrollView scrollViewToVisible:view animated:YES];
-            } else {
-                CGRect elementFrame = [view.window convertRect:element.accessibilityFrame toView:scrollView];
-                [scrollView scrollRectToVisible:elementFrame animated:YES];
-            }
+        //     if ((UIAccessibilityElement *)view == element) {
+        //         // [scrollView scrollViewToVisible:view animated:YES];
+        //     } else {
+        //         CGRect elementFrame = [view.window convertRect:element.accessibilityFrame toView:scrollView];
+        //         [scrollView scrollRectToVisible:elementFrame animated:YES];
+        //     }
             
-            // Give the scroll view a small amount of time to perform the scroll.
-            CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.3, false);
-        }
+        //     // Give the scroll view a small amount of time to perform the scroll.
+        //     CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.3, false);
+        // }
         
         superview = superview.superview;
     }

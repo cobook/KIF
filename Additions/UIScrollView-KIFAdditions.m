@@ -36,7 +36,7 @@ MAKE_CATEGORIES_LOADABLE(UIScrollView_KIFAdditions)
     }
     
     if (!CGPointEqualToPoint(contentOffset, self.contentOffset)) {
-        [self setContentOffset:contentOffset animated:animated];
+        [self scrollRectToVisible:CGRectMake(contentOffset.x, contentOffset.y, 1, 1) animated:YES];
         CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.2, false);
     }
 }

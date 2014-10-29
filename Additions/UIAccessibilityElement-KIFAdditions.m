@@ -130,7 +130,15 @@ MAKE_CATEGORIES_LOADABLE(UIAccessibilityElement_KIFAdditions)
             UIScrollView *scrollView = (UIScrollView *)superview;
             
             if ((UIAccessibilityElement *)view == element) {
+              if (![view isKindOfClass:[UITableViewCell class]]) {
                 [scrollView scrollViewToVisible:view animated:YES];
+              } else if ([scrollView isKindOfClass:[UITableView class]]) {
+                // Fixes an issue with tableViewCells not scrolling properly with scrollViewToVisible on iOS 8
+                NSIndexPath *indexPath = [(UITableView *)scrollView indexPathForCell:(UITableViewCell *)view];
+                [(UITableView *)scrollView scrollToRowAtIndexPath:indexPath
+                    atScrollPosition:UITableViewScrollPositionNone
+                    animated:YES];
+              }
             } else {
                 CGRect elementFrame = [view.window convertRect:element.accessibilityFrame toView:scrollView];
                 [scrollView scrollRectToVisible:elementFrame animated:YES];
